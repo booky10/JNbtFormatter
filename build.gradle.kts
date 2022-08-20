@@ -37,6 +37,7 @@ tasks {
     withType<JavaExec> {
         workingDir = projectDir.resolve("run")
         workingDir.mkdirs()
+        standardInput = System.`in`
     }
 
     jar {
