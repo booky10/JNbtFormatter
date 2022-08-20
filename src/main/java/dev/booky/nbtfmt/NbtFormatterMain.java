@@ -24,5 +24,7 @@ public class NbtFormatterMain {
         }
 
         CompoundBinaryTag tag = TagStringIO.get().asCompound(nbt.toString());
+        String indention = System.getenv().getOrDefault("indention", "2");
+        System.out.println(TagStringIO.builder().indent(Integer.parseInt(indention)).build().asString(tag));
     }
 }
