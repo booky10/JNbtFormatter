@@ -15,9 +15,9 @@ public class NbtFormatterMain {
                 System.out.print("Please enter nbt string: ");
             }
 
-            char c;
-            while ((c = (char) System.in.read()) != '\n') {
-                nbt.append(c);
+            int c;
+            while ((c = System.in.read()) != '\n') {
+                nbt.appendCodePoint(c);
             }
         } else {
             nbt.append(args[0]);
