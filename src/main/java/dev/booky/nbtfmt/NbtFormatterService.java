@@ -4,7 +4,6 @@ package dev.booky.nbtfmt;
 import dev.booky.nbtfmt.config.ConfigLoader;
 import dev.booky.nbtfmt.main.NbtFormatterConsole;
 import dev.booky.nbtfmt.routes.ApiRoutes;
-import dev.booky.nbtfmt.routes.FrontendRoutes;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,11 +40,11 @@ public class NbtFormatterService {
         this.javalin = Javalin.create(config -> {
             config.showJavalinBanner = false;
             config.plugins.enableRouteOverview("/api");
+            config.staticFiles.add(files -> { /**/ });
         });
 
         LOGGER.info("Configuring http routes...");
         ApiRoutes.register(this.javalin);
-        FrontendRoutes.register(this.javalin);
 
         LOGGER.info("Launching java service on {}...", this.config.getBindAddress());
         String host = this.config.getBindAddress().getAddress().getHostAddress();
