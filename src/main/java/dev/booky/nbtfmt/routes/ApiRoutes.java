@@ -30,7 +30,7 @@ public final class ApiRoutes {
         } catch (IOException exception) {
             Throwable cause = exception.getCause();
             if (cause == null || !"StringTagParseException".equals(cause.getClass().getSimpleName())) {
-                throw exception;
+                throw new RuntimeException(exception);
             }
 
             ctx.result(exception.getMessage());
