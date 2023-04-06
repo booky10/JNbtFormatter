@@ -5,6 +5,7 @@ import dev.booky.nbtfmt.config.ConfigLoader;
 import dev.booky.nbtfmt.main.NbtFormatterConsole;
 import dev.booky.nbtfmt.routes.ApiRoutes;
 import io.javalin.Javalin;
+import io.javalin.plugin.bundled.CorsPluginConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +42,7 @@ public class NbtFormatterService {
             config.showJavalinBanner = false;
             config.plugins.enableRouteOverview("/api");
             config.staticFiles.add(files -> { /**/ });
+            config.plugins.enableCors(cors -> cors.add(CorsPluginConfig::anyHost));
         });
 
         LOGGER.info("Configuring http routes...");
