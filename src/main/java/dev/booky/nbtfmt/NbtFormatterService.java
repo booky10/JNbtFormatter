@@ -16,11 +16,11 @@ public class NbtFormatterService {
 
     private static final Logger LOGGER = LogManager.getLogger("Service");
 
-    private Javalin javalin;
-    private boolean running = true;
-
     private final Path configPath;
     private NbtFormatterConfig config;
+
+    private Javalin javalin;
+    private boolean running = true;
 
     public NbtFormatterService(Path configPath) {
         this.configPath = configPath;

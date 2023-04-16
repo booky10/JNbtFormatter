@@ -21,6 +21,17 @@ public final class AddressSerializer implements TypeSerializer<InetSocketAddress
     private AddressSerializer() {
     }
 
+    public static String toString(InetSocketAddress address) {
+        String hostName = address.getHostName();
+        if (hostName == null) {
+            hostName = address.getAddress().getHostAddress();
+            if (address.getAddress() instanceof Inet6Address) {
+                hostName = "[" + hostName + "]";
+            }
+        }
+        return hostName + ":" + address.getPort();
+    }
+
     @Override
     public InetSocketAddress deserialize(Type type, ConfigurationNode node) {
         if (node.virtual()) {
@@ -42,16 +53,5 @@ public final class AddressSerializer implements TypeSerializer<InetSocketAddress
     @Override
     public void serialize(Type type, @Nullable InetSocketAddress obj, ConfigurationNode node) throws SerializationException {
         node.set(obj == null ? null : toString(obj));
-    }
-
-    public static String toString(InetSocketAddress address) {
-        String hostName = address.getHostName();
-        if (hostName == null) {
-            hostName = address.getAddress().getHostAddress();
-            if (address.getAddress() instanceof Inet6Address) {
-                hostName = "[" + hostName + "]";
-            }
-        }
-        return hostName + ":" + address.getPort();
     }
 }
